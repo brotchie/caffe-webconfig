@@ -1,0 +1,32 @@
+{
+  "name": "caffe-config",
+  "version": "0.0.1",
+  "description": "Web based config tool for the Caffe deep learning framework",
+  "scripts": {
+    "serve": "beefy js/main.js -- -t reactify",
+    "test": "mocha test"
+  },
+  "dependencies": {
+    "jsPlumb": "git://github.com/sporritt/jsPlumb",
+    "protobufjs": "^3.8.2",
+    "superagent": "^0.21.0",
+    "protobuf-textformat": "^1.0.0",
+    "async": "^0.9.0",
+    "bootstrap": "^3.3.1",
+    "react": "^0.12.1",
+    "react-bootstrap": "^0.13.0",
+    "lodash": "^2.4.1",
+    "klay-js": "git://github.com/automata/klay-js",
+    "fluxible-app": "git://github.com/yahoo/fluxible-app"
+  },
+  "devDependencies": {
+    "beefy": "^2.1.1",
+    "browserify": "^7.0.0",
+    "reactify": "^0.17.1",
+    "mocha": "^2.0.1"
+  },
+  "author": {
+      "name": "James Brotchie",
+      "email": "brotchie@gmail.com"
+  }
+}
