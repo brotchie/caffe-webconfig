@@ -7,11 +7,16 @@ var app = new FluxibleApp({
   appComponent: React.createFactory(require('./components/App.jsx'))
 });
 
-var context = app.createContext();
+app.plug(require('./plugins/jsplumb-plugin'));
+
+var context;
 
 /* Only trigger page load action once we're sure
  * jsPlumb is loaded and ready. */
-window.jsPlumb.ready(function() {
+window.jsPlumb.ready(function(jsPlumb) {
+  context = app.createContext({
+    jsPlumb: jsPlumb
+  });
   var loadPageAction = require('./actions/loadPageAction');
   context.executeAction(loadPageAction, {}, renderApplication);
 });
