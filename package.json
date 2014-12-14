@@ -1,5 +1,5 @@
 {
-  "name": "caffe-config",
+  "name": "caffe-webconfig",
   "version": "0.0.1",
   "description": "Web based config tool for the Caffe deep learning framework",
   "scripts": {
