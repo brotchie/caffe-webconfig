@@ -15,6 +15,10 @@ var GraphStore = createStore({
         y: payload.newY
       });
       this.emitChange();
+    },
+    'GRAPH_LOADED': function(payload) {
+      this.graph = payload.graph;
+      this.emitChange();
     }
   },
   initialize(dispatcher) {

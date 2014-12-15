@@ -7,7 +7,6 @@
     "test": "mocha test"
   },
   "dependencies": {
-    "protobufjs": "^3.8.2",
     "superagent": "^0.21.0",
     "protobuf-textformat": "^1.0.0",
     "async": "^0.9.0",
@@ -18,7 +17,8 @@
     "klay-js": "git://github.com/automata/klay-js",
     "fluxible-app": "git://github.com/yahoo/fluxible-app",
     "interact.js": "^1.1.3",
-    "immutable": "^3.3.0"
+    "immutable": "^3.3.0",
+    "protobufjs": "git://github.com/brotchie/ProtoBuf.js"
   },
   "devDependencies": {
     "beefy": "^2.1.1",

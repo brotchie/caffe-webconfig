@@ -65,6 +65,11 @@ var GraphViewer = React.createClass({
       graph: this.props.graph
     };
   },
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      graph: nextProps.graph
+    });
+  },
   onDragStart(id) {},
   onDrag(id, pos) {
     this.setState({

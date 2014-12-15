@@ -11,9 +11,16 @@ app.registerStore(require('./stores/GraphStore'));
 
 var context = app.createContext();
 
-var loadPageAction = require('./actions/loadPageAction');
+var loadPageAction = require('./actions/loadPageAction')
+  , loadConfigAction = require('./actions/loadConfigAction');
+
 context.executeAction(loadPageAction, {}, function(err) {
   if (err) throw err;
+
+  context.getComponentContext().executeAction(loadConfigAction, {
+    proto: 'data/caffe.proto',
+    config: 'data/mnist_autoencoder.prototxt'
+  });
 
   var element = context.createElement({});
   React.render(element, document.body);
