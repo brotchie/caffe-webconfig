@@ -2,19 +2,32 @@
 
 var React = require('react');
 
-var PatchPanel = require('./PatchPanel.jsx');
+var GraphViewer = require('./GraphViewer.jsx');
+
+var StoreMixin = require('fluxible-app').StoreMixin
+  , GraphStore = require('../stores/GraphStore');
 
 module.exports = React.createClass({
   displayName: 'App',
   propTypes: {
     context: React.PropTypes.object.isRequired
   },
+  mixins: [StoreMixin],
+  statics: {
+    storeListeners: [GraphStore]
+  },
+  onChange: function() {
+    this.setState(this.getStore(GraphStore).getState());
+  },
+  getInitialState: function() {
+    return this.getStore(GraphStore).getState();
+  },
   render: function() {
-    return (
-      <div id="panels">
-        <PatchPanel title="Node #1" id="node-1" context={this.props.context}/>
-      </div>
-    );
+    var context = this.props.context;
+
+   return (
+     <GraphViewer context={this.props.context} graph={this.state.graph}/>
+   );
   }
 });
 
