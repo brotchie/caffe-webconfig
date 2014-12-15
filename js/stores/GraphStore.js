@@ -24,13 +24,8 @@ var GraphStore = createStore({
   initialize(dispatcher) {
     /* Temporary default graph. */
     this.graph = Immutable.fromJS({
-      nodes: {
-        'node-1' : { title: 'Node #1', x: 100, y: 100 },
-        'node-2' : { title: 'Node #2', x: 50, y: 300 }
-      }, 
-      edges: {
-        'edge-1': { source: 'node-1', target: 'node-2' }
-      }
+      nodes: {}, 
+      edges: {}
     });
   },
   getState() {

@@ -38,7 +38,7 @@ var layoutGraph = function(graph, callback) {
         var finalGraph = {};
         finalGraph.nodes = _(kgraph.children)
           .map(child => {
-            return [child.id, { x: child.x, y: child.y }];
+            return [child.id, Immutable.Map({ x: child.x, y: child.y, message: graph.nodes[child.id]})];
           })
           .object()
           .value();

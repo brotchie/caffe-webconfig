@@ -12,8 +12,8 @@ var Panel = React.createClass({
   displayName: 'PatchPanel',
   propTypes: {
     context: React.PropTypes.object.isRequired,
+    message: React.PropTypes.object.isRequired,
     id: React.PropTypes.string.isRequired,
-    title: React.PropTypes.string.isRequired,
     x: React.PropTypes.number.isRequired,
     y: React.PropTypes.number.isRequired,
     onDragStart: React.PropTypes.func.isRequired,
@@ -44,7 +44,7 @@ var Panel = React.createClass({
     var style = { left: this.props.x, top: this.props.y };
     return (
       <div className="patch-panel" id={this.props.id} style={style}>
-        <div className="patch-panel-header">{this.props.title}</div>
+        <div className="patch-panel-header">{this.props.message.name}</div>
         <div className="patch-panel-content">{this.props.children}</div>
       </div>
     );
@@ -97,7 +97,7 @@ var GraphViewer = React.createClass({
     };
 
     var panels = _.map(graph.nodes, (node, id) => {
-      return <Panel key={id} id={id} title={id} x={node.x} y={node.y}
+      return <Panel key={id} id={id} message={node.message} x={node.x} y={node.y}
                     context={this.props.context} {...updateMethods}/>
     });
 
