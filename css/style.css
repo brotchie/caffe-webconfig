@@ -11,6 +11,14 @@ body {
   height: 5000px;
 }
 
+#main-canvas svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
 .patch-panel {
   position: absolute;
   font-size: 12px;
@@ -18,8 +26,6 @@ body {
   width: 200px;
   background-color: rgba(0,0,0,0.85);
   border-radius: 8px;
-
-  z-index: 20;
 }
 
 .patch-panel-header {
@@ -32,4 +38,13 @@ body {
 
 .patch-panel-content {
   padding: 6px;
+}
+
+.patch-panel-prop-name {
+  display: inline-block;
+  min-width: 80px;
+  color: #cccccc;
+}
+
+.patch-panel-prop-value {
 }
