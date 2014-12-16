@@ -42,10 +42,32 @@ var Panel = React.createClass({
   },
   render() {
     var style = { left: this.props.x, top: this.props.y };
+
+    var message = this.props.message;
+
+    var fields = _(message.$type.children)
+      .filter(T => T.className === 'Message.Field')
+      .groupBy(T => T.type.name === 'message' ? 'nested' : 'native')
+      .value();
+
+    var componentsNative = _.map(fields.native || {}, T => {
+      var value = message[T.name];
+      var empty = T.repeated ?
+        value.length === 0 :
+        value ===  null;
+
+      if (empty)
+        return null;
+
+      return <li key={T.name}>{T.name} - {value}</li>;
+    });
+
     return (
       <div className="patch-panel" id={this.props.id} style={style}>
-        <div className="patch-panel-header">{this.props.message.name}</div>
-        <div className="patch-panel-content">{this.props.children}</div>
+        <div className="patch-panel-header">{message.name}</div>
+        <div className="patch-panel-content">
+          <ul>{componentsNative}</ul>
+        </div>
       </div>
     );
   }
