@@ -42,14 +42,10 @@ var Panel = React.createClass({
       }
     });
   },
-  render() {
-    var style = { left: this.props.x, top: this.props.y };
-
-    var message = this.props.message;
-
+  renderFields(message) {
     var fields = getOrderedFields(message.$type);
 
-    var componentsNative = _.map(fields.native || {}, T => {
+    var nativeComponents = _.map(fields.native || [], T => {
       var value = message[T.name];
 
       var empty = T.repeated ?
@@ -62,7 +58,6 @@ var Panel = React.createClass({
       if (T.type.name === 'enum') {
           value = resolveEnum(T, value);
       }
-
       return (
         <div key={T.name} className="patch-panel-prop">
             <span className="patch-panel-prop-name">{T.name}</span>
@@ -71,11 +66,52 @@ var Panel = React.createClass({
       );
     });
 
+    var nestedComponents = _.map(fields.nested || [], T => {
+      var value = message[T.name];
+
+      var empty = T.repeated ?
+        value.length === 0 :
+        value ===  null;
+
+      if (empty)
+        return null;
+
+      if (!T.repeated) {
+        value = [value];
+      }
+
+      return _.map(value, (nestedMessage, index) => {
+        return (
+          <div key={T.name + '-' + index} className="patch-panel-nested">
+            <div className="patch-panel-nested-header">
+              {T.name}
+            </div>
+            {this.renderFields(nestedMessage)}
+          </div>
+        );
+      });
+    });
+
+    return [
+      nativeComponents,
+      nestedComponents
+    ];
+  },
+  render() {
+    var style = { left: this.props.x, top: this.props.y };
+
+    var message = this.props.message;
+
+    /*todo!!!
+     - Render nested fields with a single pixel margin on the left.
+     - Separate the field generating methods so we can call them
+     recursively.*/
+
     return (
       <div className="patch-panel" id={this.props.id} style={style}>
         <div className="patch-panel-header">{message.name}</div>
         <div className="patch-panel-content">
-          {componentsNative}
+            {this.renderFields(message)}
         </div>
       </div>
     );
