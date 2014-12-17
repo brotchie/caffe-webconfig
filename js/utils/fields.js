@@ -8,11 +8,16 @@ var _cache = {}
 var ORDERING = {
   '.caffe.LayerParameter': {
     remove: ['top', 'bottom'],
-    promote: ['name', 'type']
+    promote: ['name', 'type'],
+    demote: ['include', 'exclude']
   }
 };
 
 var orderFields = function(fields, orderspec) {
+  if (orderspec === undefined) {
+    return _.sortBy(fields, 'name');
+  }
+
   var ordered = 
     _(fields)
       .sortBy('name')
@@ -20,10 +25,18 @@ var orderFields = function(fields, orderspec) {
         return !_.contains(orderspec.remove, T.name);
       })
       .groupBy(T => {
-        return _.contains(orderspec.promote, T.name) ? 'promoted' : 'normal';
+        if (_.contains(orderspec.promote, T.name)) {
+          return 'promoted';
+        } else if (_.contains(orderspec.demote, T.name)) {
+          return 'demoted';
+        } else {
+          return 'normal';
+        }
       })
       .value();
-  return (ordered.promoted || []).concat(ordered.normal || []);
+  return (ordered.promoted || [])
+      .concat(ordered.normal || [])
+      .concat(ordered.demoted || []);
 };
 
 var resolveEnum = function(enumT, value) {
@@ -39,12 +52,6 @@ var resolveEnum = function(enumT, value) {
 var getOrderedFields = function(messageT) {
   var fqn = messageT.fqn()
     , orderspec = ORDERING[fqn];
-
-  /* Just return the default ordering if there's
-   * no explicit ordering specification. */
-  if (!orderspec) {
-    return messageT.children;
-  }
 
   if (_cache[fqn]) {
     return _cache[fqn];
