@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Web based config tool for the Caffe deep learning framework",
   "scripts": {
-    "serve": "beefy js/main.js -- -t [ reactify --es6 ]",
+    "serve": "beefy js/main.js 80 -- -t [ reactify --es6 ]",
     "test": "mocha test"
   },
   "dependencies": {
@@ -18,12 +18,12 @@
     "fluxible-app": "git://github.com/yahoo/fluxible-app",
     "interact.js": "^1.1.3",
     "immutable": "^3.3.0",
-    "protobufjs": "git://github.com/brotchie/ProtoBuf.js"
+    "protobufjs": "git://github.com/brotchie/ProtoBuf.js",
+    "reactify": "^0.17.1",
+    "browserify": "^7.0.0"
   },
   "devDependencies": {
     "beefy": "^2.1.1",
-    "browserify": "^7.0.0",
-    "reactify": "^0.17.1",
     "mocha": "^2.0.1"
   },
   "author": {
