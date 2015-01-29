@@ -4,7 +4,7 @@ var React = require('react');
 
 var GraphViewer = require('./GraphViewer.jsx');
 
-var StoreMixin = require('fluxible-app').StoreMixin
+var StoreMixin = require('fluxible').StoreMixin
   , GraphStore = require('../stores/GraphStore');
 
 module.exports = React.createClass({

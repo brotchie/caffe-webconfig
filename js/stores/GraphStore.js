@@ -2,7 +2,7 @@
 
 var Immutable = require('immutable');
 
-var createStore = require('fluxible-app/utils/createStore');
+var createStore = require('fluxible/utils/createStore');
 
 var edgeNumber = 0;
 

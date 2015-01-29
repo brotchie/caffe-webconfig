@@ -1,7 +1,7 @@
 "use strict";
 
 var React = require('react')
-  , FluxibleApp = require('fluxible-app');
+  , FluxibleApp = require('fluxible');
 
 var app = new FluxibleApp({
   appComponent: React.createFactory(require('./components/App.jsx'))
