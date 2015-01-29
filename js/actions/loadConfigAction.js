@@ -27,15 +27,18 @@ var layoutGraph = function(graph, callback) {
   var klayInputGraph = {
     id: 'root',
     properties: {
-      direction: 'DOWN'
+      direction: 'DOWN',
+      spacing: 10,
+      nodeLayering: 'INTERACTIVE'
     },
-    children: _.map(graph.nodes, (node, id) => { return { id: id, width: 200, height: 150 }}),
+    children: _.map(graph.nodes, (node, id) => { return { id: id, width: 200, height: 100}}),
     edges: graph.edges
   };
 
   var autolayouter = klay.init({
       onSuccess(kgraph) {
         var finalGraph = {};
+        console.log(kgraph);
         finalGraph.nodes = _(kgraph.children)
           .map(child => {
             return [child.id, Immutable.Map({ x: child.x, y: child.y, message: graph.nodes[child.id]})];

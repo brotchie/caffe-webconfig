@@ -19,7 +19,8 @@ context.executeAction(loadPageAction, {}, function(err) {
 
   context.getComponentContext().executeAction(loadConfigAction, {
     proto: 'data/caffe.proto',
-    config: 'data/mnist_autoencoder.prototxt'
+    //config: 'data/mnist_autoencoder.prototxt'
+    config: 'data/bvlc_reference_caffenet.prototxt'
   });
 
   var element = context.createElement({});
